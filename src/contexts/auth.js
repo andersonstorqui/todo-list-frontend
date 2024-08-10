@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }) => {
 
     if (userToken) {
       const parsedUserToken = JSON.parse(userToken);
-      
       const userStorage = JSON.parse(localStorage.getItem("users_db")) || [];
       const foundUser = userStorage.find(user => user.email === parsedUserToken.email);
       if (foundUser) setUser(foundUser);
@@ -19,26 +18,20 @@ export const AuthProvider = ({ children }) => {
 
   const signin = (email, password) => {
     const userStorage = JSON.parse(localStorage.getItem("users_db")) || [];
-
     const foundUser = userStorage.find(user => user.email === email);
 
-    if (foundUser) {
-      if (foundUser.password === password) {
-        const token = Math.random().toString(36).substring(2);
-        localStorage.setItem('user_token', JSON.stringify({ email, token }));
-        setUser(foundUser);
-        return null; 
-      } else {
-        return 'Email ou senha incorretos';
-      }
+    if (foundUser && foundUser.password === password) {
+      const token = Math.random().toString(36).substring(2);
+      localStorage.setItem('user_token', JSON.stringify({ email, token }));
+      setUser(foundUser);
+      return null; 
     } else {
-      return 'Usuário não encontrado';
+      return 'Email ou senha incorretos';
     }
   };
 
   const signup = ({ email, password }) => {
     const userStorage = JSON.parse(localStorage.getItem('users_db')) || [];
-
     const existingUser = userStorage.find(user => user.email === email);
 
     if (existingUser) {
@@ -47,7 +40,6 @@ export const AuthProvider = ({ children }) => {
 
     const newUser = [...userStorage, { email, password }];
     localStorage.setItem('users_db', JSON.stringify(newUser));
-
     return null; 
   };
 

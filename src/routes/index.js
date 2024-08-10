@@ -15,7 +15,7 @@ const Router = () => {
     <BrowserRouter>
       <Fragment>
         <Routes>
-          <Route path="/home" element={<PrivateRoute element={Home} />} />
+          <Route path="/home" element={<PrivateRoute element={<Home/>} />} />
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="*" element={<Login />} />
