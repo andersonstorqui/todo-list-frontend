@@ -1,7 +1,8 @@
 import { useState, useEffect, useTransition } from 'react';
-import { Container, Content } from './style';
+import { Container, Content, Input, Item, ButtonGroup } from './style';
 import ButtonMain from '../ButtonMain';
-import InputMain from '../InputMain';
+import ButtonDelete from '../ButtonDelete';
+import ButtonEdit from '../ButtonEdit';
 
 const Main = () => {
   const [tasks, setTasks] = useState('');
@@ -137,11 +138,10 @@ const Main = () => {
   return (
     <Container>
       <Content>
-        <InputMain
+        <Input
           type="text"
           placeholder="Digite a tarefa"
           value={tasks}
-          name="tasks"
           onChange={(e) => setTasks(e.target.value)}
         />
         <ButtonMain Text={isEditing ? "Salvar" : "Adicionar"} onClick={handleSubmit} />
@@ -150,16 +150,18 @@ const Main = () => {
       <Content>
         <ul>
           {taskList.map((task) => (
-            <li key={task.idtasks}>
+            <Item key={task.idtasks}>
               {task.tasks}
-              <button onClick={() => startEditTask(task)}>Editar</button>
-              <button onClick={() => handleDeleteTask(task.idtasks)}>Deletar</button>
-            </li>
+              <ButtonGroup>
+                <ButtonEdit Text="Editar" onClick={() => startEditTask(task)} />
+                <ButtonDelete Text="Deletar" onClick={() => handleDeleteTask(task.idtasks)} />
+              </ButtonGroup>
+            </Item>
           ))}
         </ul>
       </Content>
     </Container>
   );
-}
+};
 
 export default Main;

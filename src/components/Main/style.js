@@ -40,8 +40,22 @@ export const Item = styled.li`
   padding: 5px 10px;
   width: 60vw;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 35px;
   margin: 10px 0;
+  font-style: italic;
   background-color: #fff;
   border: none;
 `
+export const ListItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;

@@ -18,3 +18,9 @@ export const Label = styled.label`
   font-size: 24px;
   color: #fff;
   `
+
+  export const Aside = styled.div`
+    display: flex;
+    justify-content: end;
+    align-item: center;
+  `
